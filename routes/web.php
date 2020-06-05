@@ -11,7 +11,12 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'PagesController@root')->name('root');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
+Route::get('profile', function (){
+    return 'is verified.';
+})->middleware('verified');
