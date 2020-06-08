@@ -17,6 +17,10 @@ Route::get('/', 'PagesController@root')->name('root');
 
 Auth::routes(['verify' => true]);
 
-Route::get('profile', function (){
+Route::get('profile', function () {
     return 'is verified.';
 })->middleware('verified');
+
+Route::group(['middleware' => 'verified'], function () {
+    Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
+});
